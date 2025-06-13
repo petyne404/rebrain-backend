@@ -12,10 +12,18 @@ import authMiddleware from './middlewares/auth';
 
 const app = express();
 
+const allowedOrigins = ['http://localhost:3000'];
+
 app.use(cors({
-  origin: 'http://localhost:3000', // ✅ อนุญาตเฉพาะจาก frontend
-  credentials: true // ถ้ามี cookie หรือ header auth อื่นๆ
-}))
+  origin: allowedOrigins,
+  credentials: true
+}));
+
+app.options(/^\/.*$/, cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
+
 
 // Middleware
 app.use(express.json());
