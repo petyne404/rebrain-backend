@@ -2,7 +2,6 @@ import mongoose, { Document, Schema } from 'mongoose';
 
 export interface ITimeCounter extends Document {
   name: string;
-  userId: mongoose.Types.ObjectId;
   partnerName?: string;
   emojis: {
     mine: string;
@@ -18,11 +17,6 @@ const TimeCounterSchema: Schema<ITimeCounter> = new Schema(
     name: {
       type: String,
       required: [true, 'Please enter the counter name'],
-    },
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
     },
     partnerName: {
       type: String,

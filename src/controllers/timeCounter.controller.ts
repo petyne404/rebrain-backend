@@ -8,15 +8,14 @@ const createTimeCounter = async (
   next: NextFunction
 ): Promise<Response> => {
   try {
-    const { name, userId, partnerName, emojis, targetDate } = req.body;
+    const { name, partnerName, emojis, targetDate } = req.body;
 
-    if (!name || !userId || !targetDate) {
+    if (!name || !targetDate) {
       return res.status(400).json({ message: "Some field are missed." });
     }
     const dateFormatted = dateFormat(targetDate as string);
     const timeCounter = await TimeCounter.create({
       name,
-      userId,
       partnerName,
       emojis,
       targetDate: dateFormatted,
